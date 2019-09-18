@@ -14,11 +14,12 @@ public class MessageConsumer {
 
 
         try(ActiveMQConnectionFactory activeMQConnectionFactory=new ActiveMQConnectionFactory();
-            JMSContext jmsContext=activeMQConnectionFactory.createContext())
+            JMSContext jmsContext=activeMQConnectionFactory.createContext(JMSContext.CLIENT_ACKNOWLEDGE))
         {
             JMSConsumer consumer=jmsContext.createConsumer(requestQueue);
             TextMessage message=(TextMessage) consumer.receive();
             System.out.println(message.getText());
+            //message.acknowledge();
 
         }
 
